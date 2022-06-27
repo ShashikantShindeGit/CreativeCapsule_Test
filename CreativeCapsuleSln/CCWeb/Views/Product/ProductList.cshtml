@@ -1,0 +1,87 @@
+﻿@model CCBusinessEntity.DiscountOffersViewModel
+@{
+    ViewBag.Title = "ProductList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid mt-5">
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-info card-outline elevation-2">
+                        <div class="card-header elevation-1" style="text-align: center">
+                            <small style="font-size: larger; font-weight: 600">Product Offer </small>
+                            <div class="card-tools float-right">
+                                <button onclick="location.href='@Url.Action("Discount", "Product")'" class="btn btn-outline-info btn-sm elevation-1" data-toggle="tooltip" title="Add discount offer">Create Discount Offer</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped" id="tblFiles">
+                                            <thead>
+                                                <tr style="background-color: #23b0c4; color: white">
+                                                    <th style="text-align: center; vertical-align: middle">Sr. No.</th>
+                                                    <th style="text-align: center; vertical-align: middle">Product Name</th>
+                                                    <th style="text-align: center; vertical-align: middle">Type</th>
+                                                    <th style="text-align: center; vertical-align: middle">Rate</th>
+                                                    <th style="text-align: center; vertical-align: middle">Offer</th>
+                                                    <th style="text-align: center; vertical-align: middle">Offer Percentage</th>
+                                                    <th style="text-align: center; vertical-align: middle">Offer From </th>
+                                                    <th style="text-align: center; vertical-align: middle">Offer To</th>
+                                                    <th style="text-align: center; vertical-align: middle">Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (ViewBag.ProductList != null)
+                                                {
+                                                    if (ViewBag.ProductList.Count > 0)
+                                                    {
+                                                        int SrNo = 1;
+                                                        foreach (var item in ViewBag.ProductList)
+                                                        {
+                                                <tr>
+                                                    <td style="text-align: center;vertical-align: middle">
+                                                        @(SrNo++)
+                                                    </td>
+                                                    <td style="text-align: left; vertical-align: middle">@item.ProductName</td>
+                                                    <td style="text-align: left; vertical-align: middle"> @item.Type</td>
+                                                    <td style="text-align: left; vertical-align: middle"> @item.Rate</td>
+                                                    <td style="text-align: left; vertical-align: middle"> @item.OfferName</td>
+                                                    <td style="text-align: left; vertical-align: middle"> @item.DiscountPercent</td>
+                                                    <td style="text-align: left; vertical-align: middle"> @item.ApplicableFrom</td>
+                                                    <td style="text-align: left; vertical-align: middle"> @item.ApplicableTo</td>
+                                                    <td style="text-align: left; vertical-align: middle"> Actions</td>
+                                                </tr>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <tr>
+                                                            <td colspan="6" style="text-align: center;vertical-align: middle;color:red">
+                                                                prduct offer not found.
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+

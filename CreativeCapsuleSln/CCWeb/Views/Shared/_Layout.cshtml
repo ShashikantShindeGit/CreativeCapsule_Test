@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="~/Content/Images/unipun.png" />
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="~/Content/plugins/font-awesome/css/font-awesome.min.css">
+    <link href="~/Content/plugins/ionicons/css/ionicons.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/dist/css/adminlte.min.css" rel="stylesheet">
+    <link href="~/Content/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="~/Content/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Content/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Content/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Content/Scripts/jquery-ui-1.8.20.js"></script>
+    <script src="~/Content/plugins/jquery/jquery.min.js"></script>
+    <script src="~/Content/Custom/popper.min.js"></script>
+    <script src="~/Content/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Content/dist/js/adminlte.min.js"></script>
+    <link href="~/Content/Custom/UserDefined.css" rel="stylesheet" />
+    @*<script src="../../dist/js/demo.js"></script>*@
+
+    <script type="text/javascript">
+        function noBack() { window.history.forward() }
+        noBack();
+        window.onload = noBack;
+        window.onpageshow = function (evt) { if (evt.persisted) noBack() }
+        window.onunload = function () { void (0) }
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+</head>
+<body class="hold-transition sidebar-mini" style="font-size:small">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-fixed-top bg-white navbar-light border-bottom elevation-1">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
+                </li>
+            </ul>
+            <span class="projetheading ml-2">Product System</span>
+        </nav>
+        <!-- /.navbar -->
+
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-info elevation-4">
+            <!-- Brand Logo -->
+           <a class="brand-link">
+               
+                <span class="brand-text font-weight-heavy ml-2" style="color: white; font-size: large" title="Savitribai Phule Pune University">
+                   Product
+                </span>
+                @*<span class="brand-text font-weight-heavy ml-2" style="color: white">
+                    <img src="~/Content/Images/roundcube_Name.png" />
+                </span>*@
+            </a>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+
+
+                        <li class="nav-item mt-3">
+                            <a class="nav-link elevation-2" style="color: #fff; background-color: rgba(255,255,255,.1)">
+                                <i class="fa fa-user-o nav-icon"></i>
+                                <p>
+                                    Product Section
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("ProductList", "Product")" class="@(ViewContext.RouteData.Values["Action"].ToString() == "ProductList" ? "nav-link active" : "nav-link")">
+                                <i class="fa fa-table nav-icon"></i>
+                                <p>Product Offers</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Discount", "Product")" class="@(ViewContext.RouteData.Values["Action"].ToString() == "Discount" ? "nav-link active" : "nav-link")">
+                                <i class="fa fa-edit nav-icon"></i>
+                                <p>Create Discount</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Contains page content -->
+        <div>
+            @RenderBody()
+        </div>
+        <!-- /.content-wrapper -->
+
+        <footer class="main-footer">
+            <span style="font-weight: 600">Copyright &copy; @System.DateTime.Now.Year Savitribai Phule Pune University. All rights reserved.</span>
+        </footer>
+
+    </div>
+    <!-- ./wrapper -->
+
+</body>
+</html>
+

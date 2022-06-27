@@ -1,0 +1,159 @@
+﻿@model CCBusinessEntity.DiscountOffersViewModel
+@{
+    ViewBag.Title = "Discount";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid mt-4">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <noscript style="color: black; font-weight: bold">Sorry, JavaScript disabled in your browser, Enable it to see this website!</noscript>
+
+                        @using (Html.BeginForm("Discount", "Product", FormMethod.Post, new { EncType = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="register-box elevation-2">
+                                <div class="card card-info card-outline">
+                                    <div class="card-header elevation-1" style="text-align: center">
+                                        <small style="font-size: larger; font-weight: 600">Create Discount</small>
+                                    </div>
+                                    <div class="card-body">
+
+
+                                        <div class="form-group">
+                                            <div class="row">
+
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Offer Name<span style="color: red">*</span></label>
+                                                    @Html.TextBoxFor(model => model.OfferName, new Dictionary<string, object> {
+                                 { "data-toggle", "tooltip" }, { "title", "Enter Offer Name" },
+                                 { "id", "txtAadhaarNumber" } , { "class", "form-control" }  , { "placeholder", "Enter Offer Name" } })
+                                                    @Html.ValidationMessageFor(model => model.OfferName, string.Empty, new { @style = "color:red;!important" })
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Type <span style="color: red">*</span></label>
+                                                    @Html.DropDownListFor(model => model.Type, new SelectList(@ViewBag.Type, "Type", "Type"), "-- Select --",
+                                  new Dictionary<string, object> { { "data-toggle", "tooltip" }, { "title", "Select product type" },
+                                 { "id", "ddlType" } , { "class", "form-control" }})
+                                                    @Html.ValidationMessageFor(model => model.Type, string.Empty, new { @style = "color:red;!important" })
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Discount Percent<span style="color: red">*</span></label>
+                                                    @Html.TextBoxFor(model => model.DiscountPercent, new Dictionary<string, object> {
+                                 { "data-toggle", "tooltip" }, { "title", "Enter Discount Percent" },
+                                 { "id", "txtAadhaarNumber" } , { "class", "form-control" }  , { "placeholder", "Enter Discount Percent" } })
+                                                    @Html.ValidationMessageFor(model => model.DiscountPercent, string.Empty, new { @style = "color:red;!important" })
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Applicable From<span style="color: red">*</span></label>
+                                                    @Html.TextBoxFor(model => model.ApplicableFrom, new Dictionary<string, object> {
+                                 { "data-toggle", "tooltip" }, { "title", "Enter Applicable From" },
+                                 { "id", "txtAadhaarNumber" } , { "class", "form-control" }  , { "placeholder", "Enter Applicable From" } })
+                                                    @Html.ValidationMessageFor(model => model.ApplicableFrom, string.Empty, new { @style = "color:red;!important" })
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Applicable To<span style="color: red">*</span></label>
+                                                    @Html.TextBoxFor(model => model.ApplicableTo, new Dictionary<string, object> {
+                                 { "data-toggle", "tooltip" }, { "title", "Enter Applicable To" },
+                                 { "id", "txtAadhaarNumber" } , { "class", "form-control" }  , { "placeholder", "Enter Applicable To" } })
+                                                    @Html.ValidationMessageFor(model => model.ApplicableTo, string.Empty, new { @style = "color:red;!important" })
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="row">
+
+                                                <div class="col-md-6">
+                                                    <input class="btn btn-info btn-block elevation-1" type="submit" name="submit" value="Create Discount" />
+
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <a href="@Url.Action("Discount", "Product")" class="btn btn-info btn-block elevation-1">Cancel</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                        <div class="modal fade" id="myModalSuccess" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" style="font-weight: 600; color: green">Success</h5>
+                                        <button type="button" class="close" data-dismiss="modal" id="btnModalCloseCross">&times;</button>
+                                    </div>
+                                    <div class="modal-body" style="color: green">
+                                        <span id="lblSccMsg"></span>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-success elevation-1" data-dismiss="modal" id="btnModalClose">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal fade" id="myModalError" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" style="font-weight: 600; color: red">Error</h5>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <div class="modal-body" style="color: red">
+                                        <span id="lblErrMsg"></span>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger elevation-1" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<script type="text/javascript">
+
+         if ('@TempData["MsgScc"]' != '') {
+             $('#lblSccMsg').html('@Html.Raw((string)TempData["MsgScc"])');
+             $('#myModalSuccess').modal({ backdrop: "static" });
+        }
+
+       if ('@TempData["MsgErr"]' != '') {
+            $('#lblErrMsg').html('@Html.Raw((string)TempData["MsgErr"])');
+            $('#myModalError').modal({ backdrop: "static" });
+    }
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
